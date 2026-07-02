@@ -61,12 +61,14 @@ class SshControl extends utils.Adapter {
 	 * @param {ioBroker.State | null | undefined} state - State object.
 	 */
 	async onStateChange(id, state) {
-		if (!state || state.ack || state.val !== true || !this.hostManager) {
+		if (!state || state.ack || !this.hostManager) {
 			return;
 		}
 
-		if (id.endsWith('.command.execute')) {
+		if (id.endsWith('.command.execute') && state.val === true) {
 			await this.hostManager.executeCommand(id);
+		} else if (id.endsWith('.actions.display') && typeof state.val === 'boolean') {
+			await this.hostManager.executeDisplayAction(id, state.val);
 		}
 	}
 }
