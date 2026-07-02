@@ -2,25 +2,61 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
-		"option1": {
-			"type": "checkbox",
-			"label": "option1",
+		"hosts": {
+			"type": "table",
+			"label": "hosts",
 			"newLine": true,
 			"xs": 12,
 			"sm": 12,
-			"md": 6,
-			"lg": 4,
-			"xl": 4
-		},
-		"option2": {
-			"type": "text",
-			"label": "option2",
-			"newLine": true,
-			"xs": 12,
-			"sm": 12,
-			"md": 6,
-			"lg": 4,
-			"xl": 4
+			"md": 12,
+			"lg": 12,
+			"xl": 12,
+			"items": [
+				{
+					"attr": "id",
+					"type": "text",
+					"title": "id",
+					"validator": "data.id && !/\\s/.test(data.id)",
+					"validatorErrorText": "id must be unique and must not contain spaces",
+					"unique": true
+				},
+				{
+					"attr": "name",
+					"type": "text",
+					"title": "name"
+				},
+				{
+					"attr": "host",
+					"type": "text",
+					"title": "host"
+				},
+				{
+					"attr": "port",
+					"type": "number",
+					"title": "port",
+					"default": 22
+				},
+				{
+					"attr": "username",
+					"type": "text",
+					"title": "username"
+				},
+				{
+					"attr": "privateKeyPath",
+					"type": "text",
+					"title": "privateKeyPath"
+				},
+				{
+					"attr": "displayOnCommand",
+					"type": "text",
+					"title": "displayOnCommand"
+				},
+				{
+					"attr": "displayOffCommand",
+					"type": "text",
+					"title": "displayOffCommand"
+				}
+			]
 		}
 	}
 }

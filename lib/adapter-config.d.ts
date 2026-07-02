@@ -4,13 +4,25 @@
 
 import { native } from '../io-package.json';
 
-type _AdapterConfig = typeof native;
+type _AdapterConfig = Omit<typeof native, 'hosts'>;
 
 // Augment the globally declared type ioBroker.AdapterConfig
 declare global {
 	namespace ioBroker {
+		interface SshControlHostConfig {
+			id: string;
+			name: string;
+			host: string;
+			port: number;
+			username: string;
+			privateKeyPath: string;
+			displayOnCommand: string;
+			displayOffCommand: string;
+			privateKey?: string;
+		}
+
 		interface AdapterConfig extends _AdapterConfig {
-			// Do not enter anything here!
+			hosts: SshControlHostConfig[];
 		}
 	}
 }

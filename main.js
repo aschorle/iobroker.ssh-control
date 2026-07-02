@@ -55,10 +55,19 @@ class SshControl extends utils.Adapter {
 	}
 
 	/**
-	 * Is called if a subscribed state changes
+	 * Is called if a subscribed state changes.
+	 *
+	 * @param {string} id - State ID.
+	 * @param {ioBroker.State | null | undefined} state - State object.
 	 */
-	onStateChange() {
-		// Command and display handling will be added in later milestones.
+	async onStateChange(id, state) {
+		if (!state || state.ack || state.val !== true || !this.hostManager) {
+			return;
+		}
+
+		if (id.endsWith('.command.execute')) {
+			await this.hostManager.executeCommand(id);
+		}
 	}
 }
 
